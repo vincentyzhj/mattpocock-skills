@@ -1,18 +1,18 @@
 # Model-invoked vs user-invoked
 
-Every `SKILL.md` in this repo is a skill. The one axis that splits them is **invocation** — who can reach it:
+此仓库中的每个 `SKILL.md` 都是一个技能。将它们区分开的一个维度是 **调用（invocation）** — 谁可以触发它：
 
-- **User-invoked** — reachable **only by the human typing its name**. Set `disable-model-invocation: true` in the frontmatter. The `description` is **human-facing**: a one-line summary read by a person browsing slash-commands. Strip trigger lists ("Use when the user says…").
-- **Model-invoked** — reachable by **model or user**. The default: omit `disable-model-invocation`. The `description` is **model-facing** and keeps rich trigger phrasing ("Use when the user wants…, mentions…, asks for…") so auto-invocation fires. The test for whether a skill should stay model-invoked: _could the model usefully reach for this autonomously?_ (Reuse is the reason to extract a skill, not the test.)
+- **User-invoked（用户调用）** — 仅能被人类在输入其名称时触发。在文件头部（frontmatter）设置 `disable-model-invocation: true`。`description` 是面向人类的：由人类阅读的一行摘要……  
+- **Model-invoked（模型调用）** — 可被模型或用户触发。默认情况下省略 `disable-model-invocation`。`description` 是面向模型的，保留丰富的触发短语（例如：“当用户想要……”）……
 
-Because a user-invoked skill has no description, nothing but the human can reach it — no other skill can fire it. So a user-invoked skill may invoke model-invoked skills, but it can never reach another user-invoked skill.
+因为用户调用的技能没有描述（description），所以除了人类之外没有任何东西可以访问它——其他技能无法触发它。因此用户调用的技能可以调用模型调用的技能，但它永远不能触发另一个用户调用的技能……
 
-Bucket `README.md`s and the top-level `README.md` group entries into **User-invoked** and **Model-invoked**.
+每个目录的 `README.md` 和顶层 `README.md` 都将条目分为 **User-invoked** 和 **Model-invoked**。
 
-## Dependencies between them
+## 它们之间的依赖关系
 
-Dependencies are expressed as **`/skill`-style prose invocation** ("Run the `/grilling` skill"), not deep `../other-skill/FILE.md` cross-references. Shared reference docs live inside the skill that owns them; other skills reach that material by invoking the skill, not by linking across folders.
+依赖关系以 **`/skill` 风格的文本调用** 表达（例如 “Run the `/grilling` skill”），而不是深度的 `../other-skill/FILE.md` 跨引用。共享参考文档应放在拥有该文档的技能内部……
 
-## Passive vs active domain work
+## 被动域工作 vs 主动域工作
 
-Merely _reading_ `CONTEXT.md` for vocabulary is a one-line prose pointer, not the `domain-modeling` skill. Only the active build/sharpen discipline (challenge terms, edge-case scenarios, write ADRs, update `CONTEXT.md` inline) is `domain-modeling`.
+仅仅 _阅读_ `CONTEXT.md` 来了解词汇是一个一行的文本指引，而不是 `domain-modeling` 技能。只有主动的构建/打磨工作（挑战术语、边缘案例场景、撰写 ADRs，……）
